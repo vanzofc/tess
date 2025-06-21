@@ -1,0 +1,610 @@
+# HTML Produk Serba Otomatis dengan Status Produk
+
+Berikut kode HTML terbaru dengan penambahan status "Ready" pada setiap produk:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚜️VANZOFC Menyediakan⚜️ - Produk Otomatis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #25D366;
+            --secondary: #128C7E;
+            --accent: #075E54;
+            --light: #f5f5f5;
+            --dark: #333;
+            --gray: #777;
+            --instagram: #E1306C;
+            --ready: #4CAF50;
+            --sold: #F44336;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .social-media {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        
+        .instagram-btn {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: transform 0.3s ease;
+        }
+        
+        .instagram-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .instagram-btn i {
+            margin-right: 5px;
+            font-size: 16px;
+        }
+        
+        .whatsapp-contact {
+            background-color: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .whatsapp-contact a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        .product-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .product-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--ready);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .product-body {
+            padding: 20px;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: var(--accent);
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        
+        .benefits {
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        
+        .benefits li {
+            margin-bottom: 8px;
+            list-style-type: none;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .benefits li:before {
+            content: "✓";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+        
+        .testi-link {
+            display: block;
+            margin: 10px 0;
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 14px;
+            word-break: break-all;
+        }
+        
+        .order-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 15px;
+        }
+        
+        .order-btn:hover {
+            background-color: var(--accent);
+        }
+        
+        .order-btn.sold-out {
+            background-color: var(--sold);
+            cursor: not-allowed;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            margin: 30px 0 15px;
+            color: var(--accent);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .country-flag {
+            width: 20px;
+            height: 15px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        
+        .social-footer {
+            margin-top: 15px;
+        }
+        
+        .social-footer a {
+            color: var(--instagram);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 600px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .social-media {
+                position: static;
+                margin-top: 10px;
+                display: flex;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="social-media">
+                <a href="https://www.instagram.com/vanzofc?igsh=cHdlYXRlMXhxNWF3" class="instagram-btn" target="_blank">
+                    <i class="fab fa-instagram"></i> Follow
+                </a>
+            </div>
+            <h1>⚜️VANZOFC Menyediakan⚜️</h1>
+            <p>Produk Otomatis dengan Sistem Order WhatsApp</p>
+        </header>
+        
+        <div class="whatsapp-contact">
+            <p>Untuk pemesanan atau pertanyaan, hubungi kami via WhatsApp:</p>
+            <a href="https://wa.me/6285814435991" target="_blank">+62 858-1443-5991</a>
+            <p>Pembayaran via DANA: <strong>+62 858-1443-5991</strong></p>
+        </div>
+        
+        <h2 class="section-title">LIST HARGA SC RESS/PT/TK EVIL CRASHER</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>EVIL V7</h3>
+                </div>
+                <div class="product-body">
+                    <p>TESTI BUG V7</p>
+                    <a href="https://videy.co/v/?id=kagv3zsp1" class="testi-link" target="_blank">Lihat Testimoni</a>
+                    <div class="price">HARGA SC EVIL V7: Rp60.000</div>
+                    <ul class="benefits">
+                        <li>Benefit khusus</li>
+                        <li>Support penuh</li>
+                        <li>Update berkala</li>
+                    </ul>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20EVIL%20V7%20dengan%20harga%2060k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>RESELLER</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">HARGA RESELLER: Rp80.000</div>
+                    <ul class="benefits">
+                        <li>Harga khusus reseller</li>
+                        <li>Bisa dijual kembali</li>
+                        <li>Profit margin tinggi</li>
+                    </ul>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20RESELLER%20EVIL%20V7%20dengan%20harga%2080k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>PARTNER</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">HARGA PARTNER: Rp150.000</div>
+                    <ul class="benefits">
+                        <li>Hak akses partner</li>
+                        <li>Bonus khusus</li>
+                        <li>Support prioritas</li>
+                    </ul>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20PARTNER%20EVIL%20V7%20dengan%20harga%20150k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>TANGAN KANAN</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">HARGA TANGAN KANAN: Rp250.000</div>
+                    <ul class="benefits">
+                        <li>Akses premium</li>
+                        <li>Fitur eksklusif</li>
+                        <li>Support 24/7</li>
+                    </ul>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20TANGAN%20KANAN%20EVIL%20V7%20dengan%20harga%20250k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="section-title">OPEN SCRIPT NIKA</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>NIKA V10 NO UP</h3>
+                </div>
+                <div class="product-body">
+                    <p>TESTI BUG</p>
+                    <a href="https://vt.tiktok.com/ZSkbg14kf/" class="testi-link" target="_blank">Lihat Testimoni (v10)</a>
+                    <div class="price">HARGA: Rp35.000</div>
+                    <ul class="benefits">
+                        <li>Versi tanpa update</li>
+                        <li>Stabil dan teruji</li>
+                    </ul>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20NIKA%20V10%20NO%20UP%20dengan%20harga%2035k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>NIKA FREE UP 1x</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">HARGA: Rp50.000</div>
+                    <ul class="benefits">
+                        <li>1x free update</li>
+                        <li>Dukungan teknis</li>
+                    </ul>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20NIKA%20FREE%20UP%201x%20dengan%20harga%2050k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>NIKA FREE UP 2x</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">HARGA: Rp70.000</div>
+                    <ul class="benefits">
+                        <li>2x free update</li>
+                        <li>Prioritas support</li>
+                    </ul>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20NIKA%20FREE%20UP%202x%20dengan%20harga%2070k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="section-title">PANEL PTERODACTYL PRIVATE</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>RAM 1GB-5GB</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">Rp1.000 - Rp5.000</div>
+                    <ul class="benefits">
+                        <li>Skalable sesuai kebutuhan</li>
+                        <li>Harga per GB</li>
+                    </ul>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20Panel%20RAM%201-5GB" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>RAM 6GB-10GB</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">Rp6.000 - Rp9.000</div>
+                    <ul class="benefits">
+                        <li>Untuk kebutuhan tinggi</li>
+                        <li>Harga lebih ekonomis</li>
+                    </ul>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20Panel%20RAM%206-10GB" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>RAM UNLIMITED</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">Rp10.000</div>
+                    <ul class="benefits">
+                        <li>Akses tanpa batas</li>
+                        <li>Untuk kebutuhan besar</li>
+                    </ul>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20Panel%20RAM%20UNLIMITED" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>RESELLER PANEL</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">Rp15.000</div>
+                    <ul class="benefits">
+                        <li>PERMANEN NO EXPIRED</li>
+                        <li>SPEK RAM 16 CORE 4</li>
+                        <li>ANTI COLONG SC</li>
+                        <li>ANTI DELAY & DEL</li>
+                        <li>BISA JUALAN PANEL</li>
+                    </ul>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20RESELLER%20PANEL%20dengan%20harga%2015k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="section-title">LIST NOKOS WA by VANS</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>INDONESIA 🇮🇩</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">+62: Rp5.000</div>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20NOKOS%20WA%20Indonesia%20(+62)%20dengan%20harga%205k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>ANGOLA 🇦🇴</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">+244: Rp10.000</div>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20NOKOS%20WA%20Angola%20(+244)%20dengan%20harga%2010k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>PHILIPPINES 🇵🇭</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">+63: Rp7.000</div>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20NOKOS%20WA%20Philippines%20(+63)%20dengan%20harga%207k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>USA 🇺🇸</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">+1: Rp26.000</div>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20NOKOS%20WA%20USA%20(+1)%20dengan%20harga%2026k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>RUSSIA 🇷🇺</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">+7: Rp16.000</div>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20NOKOS%20WA%20Russia%20(+7)%20dengan%20harga%2016k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>CHINA 🇨🇳</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">+86: Rp20.000</div>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20NOKOS%20WA%20China%20(+86)%20dengan%20harga%2020k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>MYANMAR 🇲🇲</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">+95: Rp13.000</div>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20NOKOS%20WA%20Myanmar%20(+95)%20dengan%20harga%2013k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>ARGENTINA 🇦🇷</h3>
+                </div>
+                <div class="product-body">
+                    <div class="price">+54: Rp19.000</div>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20memesan%20NOKOS%20WA%20Argentina%20(+54)%20dengan%20harga%2019k" class="order-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-status">READY</span>
+                    <h3>LAINNYA</h3>
+                </div>
+                <div class="product-body">
+                    <p>Butuh negara lain?</p>
+                    <ul class="benefits">
+                        <li>Tanyakan stok kami</li>
+                        <li>Ketersediaan bervariasi</li>
+                    </ul>
+                    <a href="https://wa.me/6285814435991?text=Saya%20ingin%20menanyakan%20stok%20NOKOS%20WA%20untuk%20negara%20lain" class="order-btn">Tanya Stok</a>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 ⚜️VANZOFC Menyediakan⚜️ - All Rights Reserved</p>
+            <p>Contact WhatsApp: <a href="https://wa.me/6285814435991" target="_blank">+62 858-1443-5991</a></p>
+            <div class="social-footer">
+                Follow kami di Instagram: <a href="https://www.instagram.com/vanzofc?igsh=cHdlYXRlMXhxNWF3" target="_blank">@vanzofc</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+```
+
+## Perubahan yang Dilakukan:
+
+1. **Menambahkan Status Produk**:
+   - Setiap produk sekarang memiliki badge "READY" di pojok kanan atas kartu produk
+   - Status menggunakan warna hijau (#4CAF50) untuk menunjukkan ketersediaan
+
+2. **CSS Tambahan**:
+   - Menambahkan variabel warna untuk status (`--ready` dan `--sold`)
+   - Style untuk `.product-status` dengan:
+     - Posisi absolute di header produk
+     - Background warna hijau
+     - Text putih
+     - Border radius
+     - Ukuran font kecil
+
+3. **Struktur HTML**:
+   - Menambahkan `<span class="product-status">READY</span>` di dalam `.product-header` setiap produk
+
+4. **Fitur Siap untuk Pengembangan**:
+   - Sudah disiapkan class `.order-btn.sold-out` dan warna `--sold` untuk produk yang habis
+   - Jika suatu saat produk habis, cukup tambahkan class `sold-out` ke tombol dan ganti status menjadi "SOLD"
+
+5. **Tampilan Responsif**:
+   - Status tetap terlihat baik di semua ukuran layar
+
+Semua fitur sebelumnya tetap dipertahankan, termasuk:
+- Tombol follow Instagram
+- Link testimoni
+- Tombol pesan WhatsApp
+- Tampilan modern dan responsive
